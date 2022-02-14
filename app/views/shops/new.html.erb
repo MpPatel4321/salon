@@ -1,0 +1,33 @@
+<h2>Add salon</h2>
+
+<%= form_for @shop do |f| %>
+
+  <div class="field">
+    <%= f.label :shop_name %><br />
+    <%= f.text_field :shop_name, autofocus: true, autocomplete: "shop_name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_area :address, autofocus: true, autocomplete: "address" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :chair %><br />
+    <%= f.number_field :chair, autofocus: true, autocomplete: "chair" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :opening_time %><br />
+    <%= f.time_field :opening_time, autocomplete: "opening_time" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :closing_time %><br />
+    <%= f.time_field :closing_time, autocomplete: "closing_time" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
