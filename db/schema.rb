@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 2022_02_14_092230) do
 
   create_table "shops", force: :cascade do |t|
     t.string "shop_name", null: false
-    t.string "address", null: false
     t.integer "chair", null: false
     t.datetime "opening_time", null: false
     t.datetime "closing_time", null: false
@@ -26,7 +25,7 @@ ActiveRecord::Schema.define(version: 2022_02_14_092230) do
     t.string "email", default: "", null: false
     t.string "first_name", null: false
     t.string "last_name"
-    t.boolean "is_admin", default: false
+    t.string "role", default: "user"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
