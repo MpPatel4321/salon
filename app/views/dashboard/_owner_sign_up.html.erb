@@ -5,17 +5,23 @@
 </div> 
 <script>
   var modal = document.getElementById("myModal");
-  var btn = document.getElementById("btn");
+  var btn1 = document.getElementById("btn");
   var span = document.getElementsByClassName("close")[0];
+  var email = <%= @otp %>;
+  console.log(email);
   span.onclick = function() {
     modal.style.display = "none";
     // $('input[type="radio"][name=owner]').prop('checked', false);
     // document.location.reload(true)
   }
-  btn.onclick = function() {
+  btn1.onclick = function() {
     var otp = document.getElementById("otp").value;
-    alert(<%= @admin_email %>);
-    // modal.style.display = "none";
+    if (email == otp ) {
+      modal.style.display = "none";
+    }
+    else {
+      document.location.reload(true)
+    }
   }
 </script>
 

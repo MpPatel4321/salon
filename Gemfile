@@ -3,7 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.4'
 
-
+gem "letter_opener", group: :development
+gem 'sidekiq', '~> 6.1.3'
 gem 'devise'
 gem 'bootstrap'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'

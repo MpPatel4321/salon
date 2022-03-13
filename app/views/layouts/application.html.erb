@@ -18,19 +18,16 @@
       <%= link_to 'HOME', root_path, class: 'navbar-brand' %>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          
-        </li>
-        <li class="nav-item">
-          <% if current_user %>
-            <% if current_user.role == "admin" %>
-              <%#= link_to "Create New Owner", new_registration_path(:user), class: "nav-link" %>
-              <a href= "/users/sign_up" class = "nav-link"> Create New Owner </a>
-            <% else %>
-              <%= link_to "Edit Profile", edit_user_registration_path(current_user), class: "nav-link" %> 
-            <% end %>
-          <% end %>
-        </li>
+        <% if current_user %>
+          <li class="nav-item">
+            <%# if current_user.role == "owner" && current_user.shop.blank? %>
+              <%#= link_to "Add Shop", edit_user_registration_path(current_user), class: "nav-link" %>
+            <%# end %>     
+          </li>
+          <li class="nav-item">
+            <%= link_to "Edit Profile", edit_user_registration_path(current_user), class: "nav-link" %> 
+          </li>
+        <% end %>
       </ul>
       <div class="pull-right">
         <ul class="navbar-nav">
