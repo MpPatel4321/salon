@@ -1,0 +1,27 @@
+<span class="close">&times;</span>
+<div>
+	<input type="text" name="otp" id="otp" />
+	<button id="btn">Verify</button>  
+</div> 
+<script>
+  var modal = document.getElementById("myModal");
+  var btn1 = document.getElementById("btn");
+  var span = document.getElementsByClassName("close")[0];
+  var email = <%= @otp %>;
+  console.log(email);
+  span.onclick = function() {
+    modal.style.display = "none";
+    // $('input[type="radio"][name=owner]').prop('checked', false);
+    // document.location.reload(true)
+  }
+  btn1.onclick = function() {
+    var otp = document.getElementById("otp").value;
+    if (email == otp ) {
+      modal.style.display = "none";
+    }
+    else {
+      document.location.reload(true)
+    }
+  }
+</script>
+

@@ -6,11 +6,54 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    ></script>
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light
+            navbar-inverse navbar-fixed-top mb-4">
+      <%= link_to 'HOME', root_path, class: 'navbar-brand' %>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <% if current_user %>
+          <li class="nav-item">
+            <%# if current_user.role == "owner" && current_user.shop.blank? %>
+              <%#= link_to "Add Shop", edit_user_registration_path(current_user), class: "nav-link" %>
+            <%# end %>     
+          </li>
+          <li class="nav-item">
+            <%= link_to "Edit Profile", edit_user_registration_path(current_user), class: "nav-link" %> 
+          </li>
+        <% end %>
+      </ul>
+      <div class="pull-right">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+            </li>
+            <li class="nav-item">
+            </li>
+            <li class="nav-item">
+            </li>
+            <li class="nav-item">
+              <% if current_user %>
+                <%= link_to "Sign-Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+              <% else %>
+                <%= link_to "Log-In", new_user_session_path, class: "nav-link" %>
+              <% end %>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class='container' role='main'>
+    <%# flash.each do |key, value| %>
+      <!-- <div class="<%#= flash_class(key.to_sym) %> show" ><%#= value %></div> -->
+    <%# end %>
+
     <%= yield %>
+  </div>
   </body>
 </html>
