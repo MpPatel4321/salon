@@ -1,33 +1,41 @@
 <h2>Add salon</h2>
 
 <%= form_for @shop do |f| %>
+<%= render "users/shared/error_messages", resource: @shop %>
 
-  <div class="field">
-    <%= f.label :shop_name %><br />
-    <%= f.text_field :shop_name, autofocus: true, autocomplete: "shop_name" %>
+  <div class="form-group">
+    <%= f.label :shop_name, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+      <%= f.text_field :shop_name, autofocus: true, autocomplete: "shop_name",class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_area :address, autofocus: true, autocomplete: "address" %>
+  <div class="form-group">
+    <%= f.label :chairs, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+      <%= f.number_field :chairs, autofocus: true, autocomplete: "chairs",class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :chair %><br />
-    <%= f.number_field :chair, autofocus: true, autocomplete: "chair" %>
+  <div class="form-group">
+    <%= f.label :opening_time, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+      <%= f.time_field :opening_time, autofocus: true, autocomplete: "opening_time", step: 1800 ,class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :opening_time %><br />
-    <%= f.time_field :opening_time, autocomplete: "opening_time" %>
+  <div class="form-group">
+    <%= f.label :closing_time, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+      <%= f.time_field :closing_time, autofocus: true, autocomplete: "closing_time", step: 1800, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :closing_time %><br />
-    <%= f.time_field :closing_time, autocomplete: "closing_time" %>
-  </div>
+  <%= f.hidden_field :user_id, value: current_user.id %>
 
-  <div class="actions">
-    <%= f.submit "Submit" %>
-  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    </div>
+   </div>
 <% end %>

@@ -20,9 +20,9 @@
       <ul class="navbar-nav mr-auto">
         <% if current_user %>
           <li class="nav-item">
-            <%# if current_user.role == "owner" && current_user.shop.blank? %>
-              <%#= link_to "Add Shop", edit_user_registration_path(current_user), class: "nav-link" %>
-            <%# end %>     
+            <% if current_user.role == "owner" && current_user.shop.blank? %>
+              <%= link_to "Add Shop",new_shop_path, class: "nav-link" %>
+            <% end %>     
           </li>
           <li class="nav-item">
             <%= link_to "Edit Profile", edit_user_registration_path(current_user), class: "nav-link" %> 
