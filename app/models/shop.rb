@@ -1,5 +1,6 @@
 class Shop < ApplicationRecord
 	belongs_to :user
+  has_many :services
 
 	validates_presence_of :shop_name
   validates_presence_of :chairs

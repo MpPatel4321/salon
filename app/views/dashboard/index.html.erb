@@ -1,5 +1,7 @@
 
 <% @shops.each do |shop| %>
-	<h1> <%= shop.shop_name %> </h1>
+	<h1><%= link_to shop_path(shop) do %> 
+			<%= shop.shop_name %> </h1>
+		<% end %>
 	<h3> <%= shop.chairs %> </h3><hr>	
 <% end %>
