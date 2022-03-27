@@ -1,0 +1,41 @@
+<h2>Add Appointment</h2>
+
+<%= form_for @appointment do |f| %>
+<%= render "users/shared/error_messages", resource: @appointment %>
+
+  <div class="form-group">
+    <%= f.label :service_id, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+    	<%= f.select :service_id, options_from_collection_for_select(@services, "id" , "service_name"), class: "form-control", {:onChange=>"handler();"}, id: "select" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :on_time, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+      <%= f.number_field :on_time, autofocus: true, autocomplete: "chairs",class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :off_time, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+      <%= f.time_field :off_time, autofocus: true, autocomplete: "taken_time", step: 1800 ,class: "form-control" %>
+    </div>
+  </div>
+
+  <%= f.hidden_field :shop_id, value: @shop_id %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    </div>
+   </div>
+<% end %>
+<script>
+	function handler() {
+		var s = document.getElementById("select");
+		window.alert(s);
+	}
+</script>

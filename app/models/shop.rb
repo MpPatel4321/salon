@@ -1,6 +1,7 @@
 class Shop < ApplicationRecord
 	belongs_to :user
-  has_many :services
+  has_many :services, dependent: :destroy
+  has_many :appointments, dependent: :destroy
 
 	validates_presence_of :shop_name
   validates_presence_of :chairs

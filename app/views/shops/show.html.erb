@@ -6,5 +6,5 @@
 <% if @shop.user == current_user %>
 	<%= link_to "Add Service", new_service_path %>
 <% else %>
-	<%= link_to "Book Appointment", "#{}" %>
+	<%= link_to "Book Appointment", new_appointment_path(shop_id: @shop.id) %>
 <% end %>

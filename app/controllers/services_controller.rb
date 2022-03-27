@@ -1,7 +1,7 @@
 class ServicesController < ApplicationController
+  before_action :authenticate_user!
 
 	def show
-		byebug
 	end
 
 	def new
