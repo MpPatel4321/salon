@@ -7,7 +7,7 @@ class AppointmentsController < ApplicationController
 	def new
 		@booked_appointments = Appointment.where(shop_id: params[:shop_id])
 		@services = Service.where(shop_id: params[:shop_id])
-		@shop_id = params[:shop_id]
+		@shop = Shop.find(params[:shop_id])
 		@appointment = Appointment.new
 	end
 
@@ -18,6 +18,10 @@ class AppointmentsController < ApplicationController
 	  else
 	    render :new 
 	  end
+	end
+
+	def set_on_time
+		byebug
 	end
 
 	private

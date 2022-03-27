@@ -3,10 +3,17 @@
 <%= form_for @appointment do |f| %>
 <%= render "users/shared/error_messages", resource: @appointment %>
 
+
   <div class="form-group">
     <%= f.label :service_id, class: "col-sm-4 control-label" %>
     <div class="col-sm-6">
-    	<%= f.select :service_id, options_from_collection_for_select(@services, "id" , "service_name"), class: "form-control", {:onChange=>"handler();"}, id: "select" %>
+			<select id="select_1" class="form-control" >
+				<option value="">Select Any Option </option>
+				<% @services.each do |service| %>
+					<option value="<%= service.id %>"><%= service.service_name %></option>
+				<% end %>
+			</select>
+    	<%#= f.select :service_id, options_from_collection_for_select(@services, "id" , "service_name"), class: "form-control", id: "select_1", data: {behavior: "selectable" } %>
     </div>
   </div>
 
@@ -33,9 +40,31 @@
     </div>
    </div>
 <% end %>
-<script>
-	function handler() {
-		var s = document.getElementById("select");
-		window.alert(s);
-	}
+<% booked_on_time = [] %>
+<% booked_off_time = [] %>
+<% unless @booked_appointment.blank? %>
+	<% booked_on_time = @booked_appointment.pluck["on_time"] %>
+	<% booked_off_time = @booked_appointment.pluck["off_time"] %>
+<% end %>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+    $("#select_1").on("change",function() {
+        var state = $('select#select_1 :selected').val();
+  			if (state != "") {
+	        console.log(state);
+	        var booked_on_time = <%= booked_on_time %>;
+	        var booked_off_time = <%= booked_on_time %>;
+	        var shop_opning_time = [<%= @shop.opening_time.strftime("%I,%M") %>];
+	        var shop_closing_time = [<%= @shop.closing_time.strftime("%I-%M") %>];
+	        console.log(shop_opning_time , shop_closing_time);
+	       //  jQuery.ajax({
+		      //   url:  "set_on_time",
+		      //   type: "GET",
+		      //   dataType: "script"
+	     		// });
+      }
+    });
+	})
+
 </script>
