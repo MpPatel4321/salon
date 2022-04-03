@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources "shops"
   resources "services"
   resources "appointments"
-  get "/set_on_time", to: 'appointments#set_on_time'
+  get "set_on_time", to: 'appointments#set_on_time'
+  get "set_off_time", to: 'appointments#set_off_time'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -21,7 +21,31 @@ class AppointmentsController < ApplicationController
 	end
 
 	def set_on_time
-		byebug
+		service = Service.find(params[:id])
+		booked_appointments = Appointment.where(shop_id: service.shop_id)
+		if booked_appointments
+			ot = service.shop.opening_time
+			ct = service.shop.closing_time
+			tt = service.taken_time.strftime("%H:%M").split(":")
+			tt = (tt[0].to_i * 3600) + (tt[1].to_i * 60)
+			@on_times = [ot]
+			loop do
+	 			ot = ot + tt
+				if ot != ct
+	 				@on_times << ot
+	 			else
+	 				break
+	 			end
+			end
+			# byebug
+		end
+	end
+
+	def set_off_time
+		service = Service.find(params[:id])
+		tt = service.taken_time.strftime("%H:%M").split(":")
+		tt = (tt[0].to_i * 3600) + (tt[1].to_i * 60)
+		@off_time = params[:on_time].to_time + tt
 	end
 
 	private

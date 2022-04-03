@@ -20,17 +20,21 @@
   <div class="form-group">
     <%= f.label :on_time, class: "col-sm-4 control-label" %>
     <div class="col-sm-6">
-      <%= f.number_field :on_time, autofocus: true, autocomplete: "chairs",class: "form-control" %>
+      <select id="select_2" class="form-control" >
+				<option value="">Select On Time </option>
+			</select>
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :off_time, class: "col-sm-4 control-label" %>
     <div class="col-sm-6">
-      <%= f.time_field :off_time, autofocus: true, autocomplete: "taken_time", step: 1800 ,class: "form-control" %>
+    	<input id="off_time" class="form-control">
+      <%#= f.text_field :off_time, editable: false, class: "off_time form-control" %>
     </div>
   </div>
 
+  <%= f.hidden_field :off_time, class: "off_time_h" %>
   <%= f.hidden_field :shop_id, value: @shop_id %>
   <%= f.hidden_field :user_id, value: current_user.id %>
 
@@ -40,31 +44,27 @@
     </div>
    </div>
 <% end %>
-<% booked_on_time = [] %>
-<% booked_off_time = [] %>
-<% unless @booked_appointment.blank? %>
-	<% booked_on_time = @booked_appointment.pluck["on_time"] %>
-	<% booked_off_time = @booked_appointment.pluck["off_time"] %>
-<% end %>
 <script type="text/javascript">
 
 	$(document).ready(function() {
     $("#select_1").on("change",function() {
-        var state = $('select#select_1 :selected').val();
-  			if (state != "") {
-	        console.log(state);
-	        var booked_on_time = <%= booked_on_time %>;
-	        var booked_off_time = <%= booked_on_time %>;
-	        var shop_opning_time = [<%= @shop.opening_time.strftime("%I,%M") %>];
-	        var shop_closing_time = [<%= @shop.closing_time.strftime("%I-%M") %>];
-	        console.log(shop_opning_time , shop_closing_time);
-	       //  jQuery.ajax({
-		      //   url:  "set_on_time",
-		      //   type: "GET",
-		      //   dataType: "script"
-	     		// });
-      }
+      var service = $('select#select_1 :selected').val();
+      $.ajax({
+        url:  '/set_on_time',
+        data: ('id=' + service),
+        type: "GET",
+        dataType: "script"
+   		});
     });
-	})
-
+    $("#select_2").on("change",function() {
+      var on_time = $('select#select_2 :selected').val();
+      var service = $('select#select_1 :selected').val();
+      $.ajax({
+        url:  '/set_off_time',
+        data: ('id=' + service + '&' + 'on_time=' + on_time),
+        type: "GET",
+        dataType: "script"
+   		});
+    });
+  })
 </script>
