@@ -33,10 +33,11 @@
       <%#= f.text_field :off_time, editable: false, class: "off_time form-control" %>
     </div>
   </div>
-
-  <%= f.hidden_field :off_time, class: "off_time_h" %>
-  <%= f.hidden_field :shop_id, value: @shop_id %>
+  <%= f.hidden_field :shop_id, value: @shop.id %>
   <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :service_id, class: "service_id" %>
+  <%= f.hidden_field :on_time, class: "on_time" %>
+  <%= f.hidden_field :off_time, class: "off_time_h" %>
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-6">
@@ -49,6 +50,7 @@
 	$(document).ready(function() {
     $("#select_1").on("change",function() {
       var service = $('select#select_1 :selected').val();
+      $('.service_id').val(service)
       $.ajax({
         url:  '/set_on_time',
         data: ('id=' + service),
@@ -59,6 +61,7 @@
     $("#select_2").on("change",function() {
       var on_time = $('select#select_2 :selected').val();
       var service = $('select#select_1 :selected').val();
+      $('.on_time').val(on_time)
       $.ajax({
         url:  '/set_off_time',
         data: ('id=' + service + '&' + 'on_time=' + on_time),
