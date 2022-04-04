@@ -1,0 +1,4 @@
+<option value="">Select On Time </option>
+<% @on_times.each do |ot| %>
+	<option value="<%= ot %>"><%= ot.strftime("%I:%M %p") %></option>
+<% end %>

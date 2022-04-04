@@ -1,10 +1,14 @@
 class DashboardController < ApplicationController
   #before_action :authenticate_user!
   def index
+    @shops = Shop.all
   end
+
   def owner_sign_up
-    @admin_email = User.find_by(role: "admin").email
+    @admin_emails = User.where(role: "admin").pluck(:email)
     @otp = rand(100000..999999)
-    OtpMailer.otp_email(@admin_email, @otp).deliver_later
+    @admin_emails.each do |email|
+      OtpMailer.otp_email(email, @otp).deliver_later
+    end
   end
 end

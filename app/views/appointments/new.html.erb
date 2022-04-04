@@ -1,0 +1,73 @@
+<h2>Add Appointment</h2>
+
+<%= form_for @appointment do |f| %>
+<%= render "users/shared/error_messages", resource: @appointment %>
+
+
+  <div class="form-group">
+    <%= f.label :service_id, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+			<select id="select_1" class="form-control" >
+				<option value="">Select Any Option </option>
+				<% @services.each do |service| %>
+					<option value="<%= service.id %>"><%= service.service_name %></option>
+				<% end %>
+			</select>
+    	<%#= f.select :service_id, options_from_collection_for_select(@services, "id" , "service_name"), class: "form-control", id: "select_1", data: {behavior: "selectable" } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :on_time, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+      <select id="select_2" class="form-control" >
+				<option value="">Select On Time </option>
+			</select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :off_time, class: "col-sm-4 control-label" %>
+    <div class="col-sm-6">
+    	<input id="off_time" class="form-control">
+      <%#= f.text_field :off_time, editable: false, class: "off_time form-control" %>
+    </div>
+  </div>
+  <%= f.hidden_field :shop_id, value: @shop.id %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :service_id, class: "service_id" %>
+  <%= f.hidden_field :on_time, class: "on_time" %>
+  <%= f.hidden_field :off_time, class: "off_time_h" %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    </div>
+   </div>
+<% end %>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+    $("#select_1").on("change",function() {
+      var service = $('select#select_1 :selected').val();
+      $('.service_id').val(service)
+      $.ajax({
+        url:  '/set_on_time',
+        data: ('id=' + service),
+        type: "GET",
+        dataType: "script"
+   		});
+    });
+    $("#select_2").on("change",function() {
+      var on_time = $('select#select_2 :selected').val();
+      var service = $('select#select_1 :selected').val();
+      $('.on_time').val(on_time)
+      $.ajax({
+        url:  '/set_off_time',
+        data: ('id=' + service + '&' + 'on_time=' + on_time),
+        type: "GET",
+        dataType: "script"
+   		});
+    });
+  })
+</script>

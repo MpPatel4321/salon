@@ -1,6 +1,7 @@
-<%# if current_user.role == "admin" %>
-<br><br>
-	<%#= link_to "add shop" , new_shop_path %><br>
-<%# end %>
-<hr>
-	<%#= link_to "Sign Out" , destroy_user_session_path, method: :delete, class: "btn btn-primary"  %>
+
+<% @shops.each do |shop| %>
+	<h1><%= link_to shop_path(shop) do %> 
+			<%= shop.shop_name %> </h1>
+		<% end %>
+	<h3> <%= shop.chairs %> </h3><hr>	
+<% end %>

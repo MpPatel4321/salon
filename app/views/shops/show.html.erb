@@ -1,2 +1,10 @@
-<h1>Shops#show</h1>
-<p>Find me in app/views/shops/show.html.erb</p>
+<h1> <%= @shop.shop_name %> </h1>
+<h3> <%= @shop.chairs %> </h3>
+<h4> <%= @shop.opening_time.strftime("at %I:%M%p") %> </h4>
+<h4> <%= @shop.closing_time.strftime("at %I:%M%p") %> </h4>
+<%= render "services/index", services: @shop.services %>
+<% if @shop.user == current_user %>
+	<%= link_to "Add Service", new_service_path %>
+<% else %>
+	<%= link_to "Book Appointment", new_appointment_path(shop_id: @shop.id) %>
+<% end %>

@@ -1,4 +1,6 @@
 class ShopsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
   end
 
@@ -19,6 +21,7 @@ class ShopsController < ApplicationController
   end
 
   def show
+    @shop = Shop.find(params[:id])
   end
 
   private

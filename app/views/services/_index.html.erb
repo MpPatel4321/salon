@@ -1,0 +1,5 @@
+<% services.each do |service| %>
+	<h1> <%= service.service_name %> </h1>
+	<h3> <%= service.price %> </h3>
+	<h4> <%= service.taken_time.strftime("%H:%M") %> </h4>
+<% end %>
