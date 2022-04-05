@@ -39,8 +39,8 @@ class AppointmentsController < ApplicationController
   def find_on_time(service, appointments)
     ot = service.shop.opening_time
     ct = service.shop.closing_time
-    on_times = appointments.pluck(:on_time)
-    off_times = appointments.pluck(:off_time)
+    on_times = appointments.pluck(:on_time).compact
+    off_times = appointments.pluck(:off_time).compact
     taken_time = service.taken_time.strftime('%H:%M').split(':')
     taken_time = (taken_time[0].to_i * 3600) + (taken_time[1].to_i * 60)
     tt = 1800
@@ -48,7 +48,7 @@ class AppointmentsController < ApplicationController
     on_times_aa = []
     loop do
       ot += tt
-      ot != ct ? on_times_a << ot : break
+      (ot != ct) ? (on_times_a << ot) : break
     end
 
     (0...on_times_a.length).each do |i|
