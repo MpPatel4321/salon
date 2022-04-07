@@ -13,7 +13,6 @@
 					<option value="<%= service.id %>"><%= service.service_name %></option>
 				<% end %>
 			</select>
-    	<%#= f.select :service_id, options_from_collection_for_select(@services, "id" , "service_name"), class: "form-control", id: "select_1", data: {behavior: "selectable" } %>
     </div>
   </div>
 
@@ -29,8 +28,7 @@
   <div class="form-group">
     <%= f.label :off_time, class: "col-sm-4 control-label" %>
     <div class="col-sm-6">
-    	<input id="off_time" class="form-control">
-      <%#= f.text_field :off_time, editable: false, class: "off_time form-control" %>
+    	<input id="off_time" class="form-control" disabled=true>
     </div>
   </div>
   <%= f.hidden_field :shop_id, value: @shop.id %>

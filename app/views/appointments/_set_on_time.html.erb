@@ -1,4 +1,10 @@
-<option value="">Select On Time </option>
-<% @on_times.each do |ot| %>
-	<option value="<%= ot %>"><%= ot.strftime("%I:%M %p") %></option>
+
+<% if @on_times.blank? %>
+	<option value=""> All Times are booked </option>
+	<option value=""> Better luck next time </option>
+<% else %>
+	<option value="">Select On Time </option>
+	<% @on_times.each do |ot| %>
+		<option value="<%= ot %>"><%= ot.strftime("%I:%M %p") %></option>
+	<% end %>
 <% end %>
