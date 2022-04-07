@@ -6,7 +6,7 @@ class AppointmentsController < ApplicationController
   end
 
   def new
-    @booked_appointments = Appointment.where(shop_id: params[:shop_id])
+    @booked_appointments = Appointment.where( "strftime('%d-%m-%Y', created_at) = ? AND shop_id = ?" , Date.today.strftime("%d-%m-%Y"), params[:shop_id])
     @services = Service.where(shop_id: params[:shop_id])
     @shop = Shop.find(params[:shop_id])
     @appointment = Appointment.new
